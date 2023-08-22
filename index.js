@@ -85,6 +85,7 @@ function makeItClearer(value, higherIsBetter) {
 let timer = null;
 
 function startTimer() {
+  alert("Hold to copy image to clipboard")
   timer = setTimeout(() => {
     html2canvas(document.querySelector(".screenshot")).then((canvas) => {
       canvas.toBlob((blob) => navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]));
@@ -94,6 +95,7 @@ function startTimer() {
 }
 
 function clearTimer() {
+  alert("EEEEEEEEE");
   clearTimeout(timer);
 }
 
