@@ -83,15 +83,21 @@ function makeItClearer(value, higherIsBetter) {
 }
 
 let timer = null;
-document.addEventListener("mousedown", () => {
+
+function startTimer() {
   timer = setTimeout(() => {
     html2canvas(document.getElementsByClassName("main")[0]).then((canvas) => {
       canvas.toBlob((blob) => navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]));
       alert("Copied image to clipboard");
     });
   }, 1000);
-});
+}
 
-document.addEventListener("mouseup", () => {
+function clearTimer() {
   clearTimeout(timer);
-});
+}
+
+document.addEventListener("mousedown", startTimer);
+document.addEventListener("touchstart", startTimer);
+document.addEventListener("mouseup", clearTimer);
+document.addEventListener("touchend", clearTimer);
