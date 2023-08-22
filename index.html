@@ -39,6 +39,15 @@
 			font-weight: 600;
 		}
 
+		.screenshot {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+			align-items: center;
+			background: #60a5fa;
+			padding: 5vh;
+		}
+
 		.weather {
 			display: flex;
 			flex-direction: column;
@@ -46,7 +55,6 @@
 			padding-left: 5vw;
 			padding-right: 5vw;
 			padding-top: 5vh;
-			padding-bottom: 5vh;
 		}
 
 		.weather div {
@@ -54,25 +62,27 @@
 		}
 
 		h3 {
-			font-size: 3rem;
-			padding-bottom: 5vh;
+			font-size: 2.5rem;
 		}
 	</style>
 </head>
 
 <body>
 	<div class="main">
-		<h3>It's clearing up!</h3>
+		<div class="screenshot">
+			<h3>It's clearing up!</h3>
 
-		<div class="weather">
-			<div><img
-					src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1tYXAtcGluIj48cGF0aCBkPSJNMjAgMTBjMCA2LTggMTItOCAxMnMtOC02LTgtMTJhOCA4IDAgMCAxIDE2IDBaIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMyIvPjwvc3ZnPg==" />
-				<span id="location">Unknown</span>
+			<div class="weather">
+				<div><img
+						src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1tYXAtcGluIj48cGF0aCBkPSJNMjAgMTBjMCA2LTggMTItOCAxMnMtOC02LTgtMTJhOCA4IDAgMCAxIDE2IDBaIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMyIvPjwvc3ZnPg==" />
+					<span id="location">Unknown</span>
+				</div>
+				<div><img id="time_icon" /> <span id="temperature"></span>°C</div>
+				<div><img
+						src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS13aW5kIj48cGF0aCBkPSJNMTcuNyA3LjdhMi41IDIuNSAwIDEgMSAxLjggNC4zSDIiLz48cGF0aCBkPSJNOS42IDQuNkEyIDIgMCAxIDEgMTEgOEgyIi8+PHBhdGggZD0iTTEyLjYgMTkuNEEyIDIgMCAxIDAgMTQgMTZIMiIvPjwvc3ZnPg==" />
+					<span id="wind_speed"></span>kn
+				</div>
 			</div>
-			<div><img id="time_icon" /> <span id="temperature"></span>°C</div>
-			<div><img
-					src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS13aW5kIj48cGF0aCBkPSJNMTcuNyA3LjdhMi41IDIuNSAwIDEgMSAxLjggNC4zSDIiLz48cGF0aCBkPSJNOS42IDQuNkEyIDIgMCAxIDEgMTEgOEgyIi8+PHBhdGggZD0iTTEyLjYgMTkuNEEyIDIgMCAxIDAgMTQgMTZIMiIvPjwvc3ZnPg==" />
-				<span id="wind_speed"></span>kn</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
