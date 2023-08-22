@@ -86,7 +86,7 @@ let timer = null;
 
 function startTimer() {
   timer = setTimeout(() => {
-    html2canvas(document.querySelector("body")[0]).then((canvas) => {
+    html2canvas(document.querySelector("body")).then((canvas) => {
       canvas.toBlob((blob) => navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]));
       alert("Copied image to clipboard");
     });
