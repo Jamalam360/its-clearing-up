@@ -32,7 +32,8 @@ function onLocation(position) {
 					lat,
 					lon
         );
-      });
+      })
+      .catch(handleError);
   } else {
     fetch(url)
       .then((response) => response.json())
@@ -44,7 +45,8 @@ function onLocation(position) {
 					data.latitude,
 					data.longitude
         );
-      });
+      })
+      .catch(handleError);
   }
 }
 
@@ -55,7 +57,8 @@ function getWeather(lat, lon) {
     .then((response) => response.json())
     .then((data) => {
       updateWeather(data.current_weather);
-    });
+    })
+    .catch(handleError);
 }
 
 function updateWeather(weather) {
@@ -96,6 +99,11 @@ function startTimer() {
 
 function clearTimer() {
   clearTimeout(timer);
+}
+
+function handleError(error) {
+  console.error(error);
+  main.innerHTML = "@james there is an issue";
 }
 
 document.addEventListener("mousedown", startTimer);
