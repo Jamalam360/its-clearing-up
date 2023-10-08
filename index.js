@@ -7,20 +7,20 @@ const timeIcon = document.querySelector("#time_icon");
 const dayTimeIcon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1zdW4iPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjQiLz48cGF0aCBkPSJNMTIgMnYyIi8+PHBhdGggZD0iTTEyIDIwdjIiLz48cGF0aCBkPSJtNC45MyA0LjkzIDEuNDEgMS40MSIvPjxwYXRoIGQ9Im0xNy42NiAxNy42NiAxLjQxIDEuNDEiLz48cGF0aCBkPSJNMiAxMmgyIi8+PHBhdGggZD0iTTIwIDEyaDIiLz48cGF0aCBkPSJtNi4zNCAxNy42Ni0xLjQxIDEuNDEiLz48cGF0aCBkPSJtMTkuMDcgNC45My0xLjQxIDEuNDEiLz48L3N2Zz4=";
 const nightTimeIcon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1tb29uIj48cGF0aCBkPSJNMTIgM2E2IDYgMCAwIDAgOSA5IDkgOSAwIDEgMS05LTlaIi8+PC9zdmc+";
 
+let lat = null;
+let lon = null;
 onLocation();
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(onLocation, onLocation);
-} else {
-  main.innerHTML = "Geolocation is not supported by this browser.";
 }
 
 function onLocation(position) {
   let url = `https://api.bigdatacloud.net/data/reverse-geocode-client?localityLanguage=en`;
 
   if (position && position.coords) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
     url += `&latitude=${lat}&longitude=${lon}`;
     fetch(url)
       .then((response) => response.json())
@@ -38,12 +38,14 @@ function onLocation(position) {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        lat = data.latitude;
+        lon = data.longitude;
         updateLocation(
           data.localityInfo.administrative[
             data.localityInfo.administrative.length - 1
 					].name,
-					data.latitude,
-					data.longitude
+          lat,
+          lon
         );
       })
       .catch(handleError);
@@ -105,6 +107,10 @@ function handleError(error) {
   console.error(error);
   main.innerHTML = "@james there is an issue";
 }
+
+setInterval(() => {
+  onLocation(lat, lon);
+}, 60_000);
 
 document.addEventListener("mousedown", startTimer);
 document.addEventListener("touchstart", startTimer);
